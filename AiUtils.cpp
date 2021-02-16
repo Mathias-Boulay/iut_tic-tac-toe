@@ -1,6 +1,8 @@
 #include "types.h"
 #include "AiUtils.h"
 #include <experimental/random>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -47,7 +49,7 @@ void TurnHistoryDataIntoTrainingData(AI & AiInstance, bool hasAIWon){
         //
         MapStateData mapStateData = GetMapStateData(AiInstance._Data, turn.first);
         mapStateData[turn.second] += modifier;
-        SetMapStateData(AiInstance._Data,mapStateData);
+        SetMapStateData(AiInstance._Data,turn.first, mapStateData);
     }
 
     AiInstance._History = {};
@@ -62,6 +64,57 @@ MapStateData GetMapStateData(const TrainingData & Data, const MapState & MapStat
 
 void SetMapStateData(TrainingData & Data, const MapState & MapState, const MapStateData & MapStateData){
     Data[MapState] = MapStateData;
+}
+
+void SaveTrainingData(TrainingData & Data, const string Path){
+    ofstream ofs;
+    ofs.open(Path, ios_base::out | ios_base::trunc);
+
+    //if(!ofs.is_open()) return;
+
+    for(TrainingData::iterator it(Data.begin()); it != Data.end(); ++it){
+        //Parsing map state
+        for(char token : it->first){
+            if(token == ' ') token = '_';
+            ofs << token;
+        }
+
+        ofs << " :";
+        //Parse turn score
+        for(int score : it->second){
+            ofs << " " << score;
+        }
+        ofs << endl;
+    }
+    ofs.close();
+}
+
+TrainingData GetTrainingData(const std::string Path){
+    TrainingData Data;
+    ifstream ifs;
+    string Key;
+    string Value;
+
+    ifs.open(Path);
+    if(!ifs.is_open()) return Data;
+
+    while (ifs >> Key){
+        MapState MapState;
+        MapStateData MapStateData;
+
+        for(char & Char : Key){
+            MapState.push_back(Char == '_' ? ' ' : Char);
+        }
+
+        ifs >> Value; //Throwaway the :
+        for(unsigned i(0); i<9; ++i){
+            ifs >> Value;
+            MapStateData.push_back(stoi(Value));
+        }
+
+        Data[MapState] = MapStateData;
+    }
+    return Data;
 }
 
 
