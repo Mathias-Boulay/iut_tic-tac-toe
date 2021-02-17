@@ -21,12 +21,31 @@ bool HasSomeoneWon(const GameMap & Map){
     return false;
 }
 
-bool putToken(GameMap & Map, const char Token, const unsigned index){
+bool IsGameMapFull(const GameMap & Map){
+    for(Cell cell : Map){
+        if(cell == EMPTY_CELL) return false;
+    }
+    return true;
+}
+
+bool PutToken(GameMap & Map, const char Token, const unsigned index){
     if(index > 9) return false;
     if(Map[index] != ' ') return false;
 
     Map[index] = Token;
     return true;
+}
+
+GameMap InitGameMap(){
+    return GameMap{EMPTY_CELL,
+                    EMPTY_CELL,
+                    EMPTY_CELL,
+                    EMPTY_CELL,
+                    EMPTY_CELL,
+                    EMPTY_CELL,
+                    EMPTY_CELL,
+                    EMPTY_CELL,
+                    EMPTY_CELL};
 }
 
 

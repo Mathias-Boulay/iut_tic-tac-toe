@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 
+#define EMPTY_CELL ' '
+
 typedef char Cell;
 typedef std::vector<char> MapState;
 typedef std::vector<int> MapStateData;
