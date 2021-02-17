@@ -117,5 +117,67 @@ TrainingData GetTrainingData(const std::string Path){
     return Data;
 }
 
+bool TryToFill(GameMap & Map, AI & AiInstance, char & TokenToCheck){
+    unsigned index;
+    for(unsigned i(0); i<3; ++i){
+        //Check horizontal filling
+        index = (i*2)+i;
 
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+1] && Map[index+2] == ' '){
+            return PlayAITurn(Map, AiInstance, index+2);
+        }
+
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+2] && Map[index+1] == ' '){
+            return PlayAITurn(Map, AiInstance, index+1);
+        }
+
+        if(Map[index+1] == TokenToCheck && Map[index+1] == Map[index+2] && Map[index] == ' '){
+            return PlayAITurn(Map, AiInstance, index);
+        }
+
+
+        //Check horizontal filling
+        index = i;
+
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+3] && Map[index+6] == ' '){
+            return PlayAITurn(Map, AiInstance, index+6);
+        }
+
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+6] && Map[index+3] == ' '){
+            return PlayAITurn(Map, AiInstance, index+3);
+        }
+
+        if(Map[index+3] == TokenToCheck && Map[index+3] == Map[index+6] && Map[index] == ' '){
+            return PlayAITurn(Map, AiInstance, index);
+        }
+    }
+
+    //Check diagonals
+    if(Map[0] == TokenToCheck && Map[0] == Map[4] && Map[8] == ' '){
+        return PlayAITurn(Map, AiInstance, 8);
+    }
+
+    if(Map[0] == TokenToCheck && Map[0] == Map[8] && Map[4] == ' '){
+        return PlayAITurn(Map, AiInstance, 4);
+    }
+
+    if(Map[4] == TokenToCheck && Map[4] == Map[8] && Map[0] == ' '){
+        return PlayAITurn(Map, AiInstance, 0);
+    }
+
+    //diagonal 2
+    if(Map[2] == TokenToCheck && Map[2] == Map[4] && Map[6] == ' '){
+        return PlayAITurn(Map, AiInstance, 6);
+    }
+
+    if(Map[2] == TokenToCheck && Map[2] == Map[6] && Map[4] == ' '){
+        return PlayAITurn(Map, AiInstance, 4);
+    }
+
+    if(Map[4] == TokenToCheck && Map[4] == Map[6] && Map[2] == ' '){
+        return PlayAITurn(Map, AiInstance, 2);
+    }
+
+    return false;
+}
 

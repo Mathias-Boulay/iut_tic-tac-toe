@@ -20,4 +20,6 @@ void SaveTrainingData(TrainingData & Data, std::string Path);
 
 TrainingData GetTrainingData(const std::string Path);
 
+bool TryToFill(GameMap & Map, AI & AiInstance, char & TokenToCheck);
+
 #endif // AIUTILS_H
