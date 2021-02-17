@@ -6,7 +6,7 @@
 
 
 
-void PlayTurn(GameMap & Map, AI & AiInstance);
+bool PlayAITurn(GameMap & Map, AI & AiInstance, int ForcedIndex = -1);
 
 unsigned SelectBestCell(MapState & MapState, TrainingData Data);
 

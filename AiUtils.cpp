@@ -1,21 +1,24 @@
 #include "types.h"
 #include "AiUtils.h"
+#include "GameUtils.h"
 #include <experimental/random>
 #include <fstream>
 #include <iostream>
 
 using namespace std;
 
-void PlayTurn(GameMap & Map, AI & AiInstance){
+bool PlayAITurn(GameMap & Map, AI & AiInstance, int ForcedIndex){
     //Get the map state and decide where to play
     MapState mapState = Map;
-    unsigned bestCell = SelectBestCell(mapState, AiInstance._Data);
+    unsigned bestCell = ForcedIndex == -1 ? SelectBestCell(mapState, AiInstance._Data) : ForcedIndex;
 
     //Place the token
-    Map[bestCell] = AiInstance._Token;
+    bool hasPlaced = PutToken(Map, AiInstance._Token, bestCell);
 
     //Add this to the turn history
     AiInstance._History.push_back(make_pair(mapState, bestCell));
+
+    return hasPlaced;
 }
 
 unsigned SelectBestCell(MapState & MapState, TrainingData Data){

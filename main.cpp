@@ -31,7 +31,7 @@ int main()
             break;
         }
 
-        PlayTurn(GameMap, AiInstance);
+        PlayAITurn(GameMap, AiInstance);
 
         if(hasSomeoneWon(GameMap)){
             TurnHistoryDataIntoTrainingData(AiInstance, true);
