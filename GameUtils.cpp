@@ -1,6 +1,6 @@
 #include "GameUtils.h"
 
-bool hasSomeoneWon(const GameMap & Map){
+bool HasSomeoneWon(const GameMap & Map){
     for(unsigned i(0); i<3; ++i){
         //Check horizontal alignement
         if(Map[(i*2) + i] == Map[(i*2) + i+1] && Map[(i*2) + i] == Map[(i*2) + i+2] && Map[(i*2) + i] != ' '){
@@ -14,7 +14,7 @@ bool hasSomeoneWon(const GameMap & Map){
     }
 
     //Check diagonals
-    if(((Map[0] == Map[4] && Map[0] == Map[8]) &&(Map[2] == Map[4] && Map[2] == Map[6])) && (Map[4] != ' ')){
+    if(((Map[0] == Map[4] && Map[0] == Map[8]) || (Map[2] == Map[4] && Map[2] == Map[6])) && (Map[4] != ' ')){
         return true;
     }
 

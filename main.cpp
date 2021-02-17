@@ -25,7 +25,7 @@ int main()
         char input = ReadSpecificKeyboardInput({'1','2','3','4','5','6','7','8','9'});
         GameMap[input-'1'] = Player1Token;
 
-        if(hasSomeoneWon(GameMap)){
+        if(HasSomeoneWon(GameMap)){
             TurnHistoryDataIntoTrainingData(AiInstance, false);
             SaveTrainingData(AiInstance._Data, "file.txt");
             break;
@@ -33,7 +33,7 @@ int main()
 
         PlayAITurn(GameMap, AiInstance);
 
-        if(hasSomeoneWon(GameMap)){
+        if(HasSomeoneWon(GameMap)){
             TurnHistoryDataIntoTrainingData(AiInstance, true);
             SaveTrainingData(AiInstance._Data, "file.txt");
             break;
