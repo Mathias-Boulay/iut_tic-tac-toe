@@ -5,6 +5,6 @@
 
 void ClearDisplay();
 
-void DisplayGame(GameMap & Map);
+void DisplayGameMap(GameMap & Map);
 
 #endif // DISPLAYUTILS_H

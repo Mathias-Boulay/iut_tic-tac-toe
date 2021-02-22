@@ -1,13 +1,17 @@
+#include <iostream>
+#include <experimental/random>
+
 #include "Game.h"
 #include "types.h"
 #include "GameUtils.h"
 #include "AiUtils.h"
-#include <experimental/random>
 #include "DisplayUtils.h"
+#include "InputUtils.h"
+
 
 using namespace std;
 
-void TrainAI(){
+void TrainAI(unsigned nbGame){
     unsigned index = 0;
     AI AIToTrain;
     AI controlledAI;
@@ -29,7 +33,7 @@ void TrainAI(){
         turnOrder.push_back("AIToTrain");
     }
 
-    while (index <= 1000000){
+    while (index <= nbGame){
         gameMap = InitGameMap();
 
         while (true) {
@@ -70,14 +74,46 @@ void TrainAI(){
 
                 turnIndex = turnIndex < turnOrder.size()-1 ? turnIndex+1 : 0;
             }
-            DisplayGame(gameMap);
+            DisplayGameMap(gameMap);
+            //Display some additionnal info
+            cout << "Game " << index << '/' << nbGame;
         }
 
     index+=1;
-
-
     }
 
     SaveTrainingData(AIToTrain._Data,"InstanceOne.txt");
     SaveTrainingData(controlledAI._Data,"InstanceTwo.txt");
+}
+
+void PlayAgainstAI(){
+    while (true) {
+        AI AiInstance;
+        AiInstance._Token = Player1Token;
+        AiInstance._Data = GetTrainingData("InstanceOne.txt");
+
+        GameMap GameMap = InitGameMap();
+
+
+        while(true) {
+            char input = ReadSpecificKeyboardInput({'1','2','3','4','5','6','7','8','9'});
+            GameMap[input-'1'] = Player2Token;
+
+            if(HasSomeoneWon(GameMap)){
+                TurnHistoryDataIntoTrainingData(AiInstance, false);
+                SaveTrainingData(AiInstance._Data, "file.txt");
+                break;
+            }
+            DisplayGameMap(GameMap);
+            PlayAITurn(GameMap, AiInstance);
+
+            if(HasSomeoneWon(GameMap)){
+                TurnHistoryDataIntoTrainingData(AiInstance, true);
+                SaveTrainingData(AiInstance._Data, "file.txt");
+                break;
+            }
+
+            DisplayGameMap(GameMap);
+        }
+    }
 }

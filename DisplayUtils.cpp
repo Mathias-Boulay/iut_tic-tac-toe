@@ -7,7 +7,7 @@ void ClearDisplay(){
     cout << "\033[H\033[2J";
 }
 
-void DisplayGame(GameMap & Map){
+void DisplayGameMap(GameMap & Map){
     ClearDisplay();
     //Display in a way to match the number pad.
     for(int i(2); i>-1; --i){
