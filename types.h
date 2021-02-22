@@ -3,18 +3,18 @@
 
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 #define EMPTY_CELL ' '
 
 typedef char Cell;
-typedef std::vector<char> MapState;
-typedef std::vector<int> MapStateData;
+typedef std::string MapState;
+typedef std::string MapStateData;
 
 //Note that the GameMap size should always be 9.
-typedef std::vector<char> GameMap;
+typedef std::string GameMap;
 
-typedef std::map<MapState, MapStateData> TrainingData;
+typedef std::unordered_map<MapState, MapStateData> TrainingData;
 
 typedef std::vector<std::pair<MapState, unsigned>> TurnHistory;
 
