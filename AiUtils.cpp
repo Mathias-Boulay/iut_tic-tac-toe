@@ -27,7 +27,7 @@ unsigned SelectBestCell(MapState & MapState, TrainingData Data){
 
     //Checking the action with the highest score.
     for(unsigned i = 0; i < MapState.size(); ++i){
-        if(MapState[i] == ' '){
+        if(MapState[i] == EMPTY_CELL){
             int tmpScore = GetMapStateData(Data,MapState)[i];
 
             if(score < tmpScore){
@@ -78,7 +78,7 @@ void SaveTrainingData(TrainingData & Data, const string Path){
     for(TrainingData::iterator it(Data.begin()); it != Data.end(); ++it){
         //Parsing map state
         for(char token : it->first){
-            if(token == ' ') token = '_';
+            if(token == EMPTY_CELL) token = '_';
             ofs << token;
         }
 
@@ -105,8 +105,8 @@ TrainingData GetTrainingData(const std::string Path){
         MapState MapState;
         MapStateData MapStateData;
 
-        for(char & Char : Key){
-            MapState.push_back(Char == '_' ? ' ' : Char);
+        for(Cell & cell : Key){
+            MapState.push_back(cell == '_' ? EMPTY_CELL : cell);
         }
 
         ifs >> Value; //Throwaway the :
@@ -126,15 +126,15 @@ bool TryToFill(GameMap & Map, AI & AiInstance, char & TokenToCheck){
         //Check horizontal filling
         index = (i*2)+i;
 
-        if(Map[index] == TokenToCheck && Map[index] == Map[index+1] && Map[index+2] == ' '){
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+1] && Map[index+2] == EMPTY_CELL){
             return PlayAITurn(Map, AiInstance, index+2);
         }
 
-        if(Map[index] == TokenToCheck && Map[index] == Map[index+2] && Map[index+1] == ' '){
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+2] && Map[index+1] == EMPTY_CELL){
             return PlayAITurn(Map, AiInstance, index+1);
         }
 
-        if(Map[index+1] == TokenToCheck && Map[index+1] == Map[index+2] && Map[index] == ' '){
+        if(Map[index+1] == TokenToCheck && Map[index+1] == Map[index+2] && Map[index] == EMPTY_CELL){
             return PlayAITurn(Map, AiInstance, index);
         }
 
@@ -142,42 +142,42 @@ bool TryToFill(GameMap & Map, AI & AiInstance, char & TokenToCheck){
         //Check horizontal filling
         index = i;
 
-        if(Map[index] == TokenToCheck && Map[index] == Map[index+3] && Map[index+6] == ' '){
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+3] && Map[index+6] == EMPTY_CELL){
             return PlayAITurn(Map, AiInstance, index+6);
         }
 
-        if(Map[index] == TokenToCheck && Map[index] == Map[index+6] && Map[index+3] == ' '){
+        if(Map[index] == TokenToCheck && Map[index] == Map[index+6] && Map[index+3] == EMPTY_CELL){
             return PlayAITurn(Map, AiInstance, index+3);
         }
 
-        if(Map[index+3] == TokenToCheck && Map[index+3] == Map[index+6] && Map[index] == ' '){
+        if(Map[index+3] == TokenToCheck && Map[index+3] == Map[index+6] && Map[index] == EMPTY_CELL){
             return PlayAITurn(Map, AiInstance, index);
         }
     }
 
     //Check diagonals
-    if(Map[0] == TokenToCheck && Map[0] == Map[4] && Map[8] == ' '){
+    if(Map[0] == TokenToCheck && Map[0] == Map[4] && Map[8] == EMPTY_CELL){
         return PlayAITurn(Map, AiInstance, 8);
     }
 
-    if(Map[0] == TokenToCheck && Map[0] == Map[8] && Map[4] == ' '){
+    if(Map[0] == TokenToCheck && Map[0] == Map[8] && Map[4] == EMPTY_CELL){
         return PlayAITurn(Map, AiInstance, 4);
     }
 
-    if(Map[4] == TokenToCheck && Map[4] == Map[8] && Map[0] == ' '){
+    if(Map[4] == TokenToCheck && Map[4] == Map[8] && Map[0] == EMPTY_CELL){
         return PlayAITurn(Map, AiInstance, 0);
     }
 
     //diagonal 2
-    if(Map[2] == TokenToCheck && Map[2] == Map[4] && Map[6] == ' '){
+    if(Map[2] == TokenToCheck && Map[2] == Map[4] && Map[6] == EMPTY_CELL){
         return PlayAITurn(Map, AiInstance, 6);
     }
 
-    if(Map[2] == TokenToCheck && Map[2] == Map[6] && Map[4] == ' '){
+    if(Map[2] == TokenToCheck && Map[2] == Map[6] && Map[4] == EMPTY_CELL){
         return PlayAITurn(Map, AiInstance, 4);
     }
 
-    if(Map[4] == TokenToCheck && Map[4] == Map[6] && Map[2] == ' '){
+    if(Map[4] == TokenToCheck && Map[4] == Map[6] && Map[2] == EMPTY_CELL){
         return PlayAITurn(Map, AiInstance, 2);
     }
 

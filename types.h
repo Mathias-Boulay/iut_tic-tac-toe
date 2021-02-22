@@ -22,6 +22,7 @@ const char Player1Token = 'X';
 
 const char Player2Token = 'O';
 
+
 struct AI{
     TrainingData _Data;
     TurnHistory _History;

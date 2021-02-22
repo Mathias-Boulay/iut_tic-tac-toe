@@ -12,7 +12,7 @@ void DisplayGame(GameMap & Map){
     //Display in a way to match the number pad.
     for(int i(2); i>-1; --i){
         for(unsigned j(0); j<3; ++j){
-            cout << string({Map[(i*3)+j],' '});
+            cout << string({Map[(i*3)+j],EMPTY_CELL});
         }
         cout << endl;
     }
