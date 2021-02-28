@@ -1,4 +1,4 @@
-# iut_tic-tac-toe
+# Machine Learning tic-tac-toe
 ![image](https://user-images.githubusercontent.com/24864674/109415060-b6a1d500-79b6-11eb-9d22-c24bda89fdb6.png)
 
 This repository is the perfect example to understand a basic implementation of machine learning in video games.
