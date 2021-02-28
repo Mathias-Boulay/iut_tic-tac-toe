@@ -4,7 +4,7 @@
 This repository is the perfect example to understand a basic implementation of machine learning in video games.
 
 
-## Generate a dataset
+## GENERATING A DATASET
 To generate a dataset for the AI, you need to build the program, and use the UI in terminal to launch a training session.
 Each training session can use the last dataset, or create a new one from nothing.
 
@@ -20,12 +20,12 @@ X__XO_O_O : 0 0 -1 0 0 0 0 -1 0
 ___XO___O : -2 -2 -2 0 0 -2 -2 -3 0
 __X__OOXO : -1 0 0 -1 0 0 0 0 0
 ```
-#### Quick explanation on how the data is organised:
+##### Quick explanation on how the data is organised:
 - The left part of each line represent the state at which was the map when the AI had to play.
 - The right part of each line represents the score of each cell.
 - You may see a lot of zero, and this is normal. There is an issue with data redundancy because you can't play on an already occupied cell
 
-## How does it work ?
+## HOW DOES IT WORK ?
 For the non-tech savy navigating here on github *(shame on you)* this AI trains itself by storing its actions for each turn, and applies a score once it lost or won.
 When possible, it uses the highest scored cell to play on, in hopes it will win.
 
