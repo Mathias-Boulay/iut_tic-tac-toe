@@ -26,14 +26,14 @@ __X__OOXO : -1 0 0 -1 0 0 0 0 0
 - You may see a lot of zero, and this is normal. There is an issue with data redundancy because you can't play on an already occupied cell
 
 ## HOW DOES IT WORK ?
-For the non-tech savy navigating here on github *(shame on you)* this AI trains itself by storing its actions for each turn, and applies a score once it lost or won.
+For the non-tech savy navigating here on github this AI trains itself by storing its actions for each turn, and applies a score once it lost or won.
 When possible, it uses the highest scored cell to play on, in hopes it will win.
 
 ## BUILDING
-The code was build on Lubuntu 20.04 with QTCreator 5.12.X.
+The code was built on Lubuntu 20.04 with QTCreator 5.12.X.
 
-Building on windows isn't possible at the moment, since the InputUtils (and part of the DisplayUtils) are tailored for linux only.
+Building on Windows™ isn't possible at the moment, since the InputUtils (and part of the DisplayUtils) are tailored for Linux only.
 
 ## CONTRIBUTING
 If you wish to contribute, great !
-You can do a small or big contributions through pull requests
+You can make a small or big contribution through pull requests
