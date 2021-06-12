@@ -35,10 +35,12 @@ void TrainAI(unsigned nbGame /*= 1000000*/){
 
     while (index <= nbGame){
         gameMap = InitGameMap();
+        DisplayGameMap(gameMap);
 
         while (true) {
             if(turnOrder[turnIndex] == "AIToTrain"){
                 PlayAITurn(gameMap,AIToTrain);
+                DisplayGameMap(gameMap);
 
                 if(HasSomeoneWon(gameMap)){
                     TurnHistoryDataIntoTrainingData(AIToTrain, true);
@@ -60,6 +62,7 @@ void TrainAI(unsigned nbGame /*= 1000000*/){
                         PlayAITurn(gameMap, controlledAI);
                     }
                 }
+                DisplayGameMap(gameMap);
 
                 if(HasSomeoneWon(gameMap)){
                     TurnHistoryDataIntoTrainingData(AIToTrain, false);
@@ -74,7 +77,7 @@ void TrainAI(unsigned nbGame /*= 1000000*/){
 
                 turnIndex = turnIndex < turnOrder.size()-1 ? turnIndex+1 : 0;
             }
-            DisplayGameMap(gameMap);
+
             //Display some additionnal info
             cout << "Game " << index << '/' << nbGame;
         }
