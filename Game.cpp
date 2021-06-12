@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void TrainAI(unsigned nbGame){
+void TrainAI(unsigned nbGame /*= 1000000*/){
     unsigned index = 0;
     AI AIToTrain;
     AI controlledAI;
