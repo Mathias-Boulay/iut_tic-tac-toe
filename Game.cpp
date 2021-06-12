@@ -93,6 +93,7 @@ void PlayAgainstAI(){
         AiInstance._Data = GetTrainingData("InstanceOne.txt");
 
         GameMap GameMap = InitGameMap();
+        DisplayGameMap(GameMap);
 
 
         while(true) {
@@ -102,18 +103,17 @@ void PlayAgainstAI(){
             if(HasSomeoneWon(GameMap)){
                 TurnHistoryDataIntoTrainingData(AiInstance, false);
                 SaveTrainingData(AiInstance._Data, "file.txt");
+                DisplayGameMap(GameMap);
                 break;
             }
-            DisplayGameMap(GameMap);
             PlayAITurn(GameMap, AiInstance);
+            DisplayGameMap(GameMap);
 
             if(HasSomeoneWon(GameMap)){
                 TurnHistoryDataIntoTrainingData(AiInstance, true);
                 SaveTrainingData(AiInstance._Data, "file.txt");
                 break;
             }
-
-            DisplayGameMap(GameMap);
         }
     }
 }
