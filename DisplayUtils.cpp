@@ -9,11 +9,18 @@ void ClearDisplay(){
 
 void DisplayGameMap(GameMap & Map){
     ClearDisplay();
-    //Display in a way to match the number pad.
-    for(int i(2); i>-1; --i){
-        for(unsigned j(0); j<3; ++j){
-            cout << string({Map[(i*3)+j],EMPTY_CELL});
-        }
-        cout << endl;
+    string mapModel = R"LIMIT(
+╔═══╦═══╦═══╗
+║ 6 ║ 7 ║ 8 ║
+╠═══╬═══╬═══╣
+║ 3 ║ 4 ║ 5 ║
+╠═══╬═══╬═══╣
+║ 0 ║ 1 ║ 2 ║
+╚═══╩═══╩═══╝
+)LIMIT";
+    for(int i(0), index(0); i<9; ++i){
+        index = mapModel.find(to_string(i));
+        mapModel.replace(index, 1, 1, Map[i]);
     }
+    cout << mapModel;
 }
