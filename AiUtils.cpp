@@ -21,7 +21,7 @@ bool PlayAITurn(GameMap & Map, AI & AiInstance, int ForcedIndex){
     return hasPlaced;
 }
 
-unsigned SelectBestCell(MapState & MapState, TrainingData Data){
+unsigned SelectBestCell(const MapState & MapState, const TrainingData Data){
     int score = INT32_MIN;
     unsigned bestCell;
 
@@ -69,13 +69,13 @@ void SetMapStateData(TrainingData & Data, const MapState & MapState, const MapSt
     Data[MapState] = MapStateData;
 }
 
-void SaveTrainingData(TrainingData & Data, const string Path){
+void SaveTrainingData(const TrainingData & Data, const string Path){
     ofstream ofs;
     ofs.open(Path, ios_base::out | ios_base::trunc);
 
     //if(!ofs.is_open()) return;
 
-    for(TrainingData::iterator it(Data.begin()); it != Data.end(); ++it){
+    for(TrainingData::const_iterator it(Data.begin()); it != Data.end(); ++it){
         //Parsing map state
         for(char token : it->first){
             if(token == EMPTY_CELL) token = '_';
@@ -120,7 +120,7 @@ TrainingData GetTrainingData(const std::string Path){
     return Data;
 }
 
-bool TryToFill(GameMap & Map, AI & AiInstance, char & TokenToCheck){
+bool TryToFill(GameMap & Map, AI & AiInstance, const char & TokenToCheck){
     unsigned index;
     for(unsigned i(0); i<3; ++i){
         //Check horizontal filling
