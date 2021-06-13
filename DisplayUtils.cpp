@@ -7,7 +7,7 @@ void ClearDisplay(){
     cout << "\033[H\033[2J";
 }
 
-void DisplayGameMap(GameMap & Map){
+void DisplayGameMap(const GameMap & Map){
     ClearDisplay();
     string mapModel = R"LIMIT(
 ╔═══╦═══╦═══╗
