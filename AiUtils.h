@@ -5,7 +5,7 @@
 #include <string>
 
 /*!
- * \file DisplayUtils.h
+ * \file AIUtils.h
  * \brief Un set of functions used by the AI
  * \author BOULAY Mathias
  * \version 1.0
