@@ -57,8 +57,8 @@ void TrainAI(const unsigned nbGame /*= 1000000*/){
 
             }else if(turnOrder[turnIndex] == "controlledAI"){
 
-                if(!TryToFill(gameMap, controlledAI, AIToTrain._Token)){
-                    if(!TryToFill(gameMap, controlledAI, controlledAI._Token)){
+                if(!TryToFill(gameMap, controlledAI, controlledAI._Token)){
+                    if(!TryToFill(gameMap, controlledAI, AIToTrain._Token)){
                         PlayAITurn(gameMap, controlledAI);
                     }
                 }
