@@ -11,6 +11,18 @@
 
 using namespace std;
 
+
+void generateRandomTurnOrder(vector<string> & turnOrder){
+    turnOrder.clear();
+    if(experimental::randint(0,1) == 0){
+        turnOrder.push_back("AIToTrain");
+        turnOrder.push_back("controlledAI");
+    }else{
+        turnOrder.push_back("controlledAI");
+        turnOrder.push_back("AIToTrain");
+    }
+}
+
 void TrainAI(const unsigned nbGame /*= 1000000*/){
     unsigned index = 0;
     AI AIToTrain;
@@ -25,13 +37,7 @@ void TrainAI(const unsigned nbGame /*= 1000000*/){
     AIToTrain._Data = GetTrainingData("InstanceOne.txt");
     controlledAI._Data = GetTrainingData("InstanceTwo.txt");
 
-    if(experimental::randint(0,1) == 0){
-        turnOrder.push_back("AIToTrain");
-        turnOrder.push_back("controlledAI");
-    }else{
-        turnOrder.push_back("controlledAI");
-        turnOrder.push_back("AIToTrain");
-    }
+    generateRandomTurnOrder(turnOrder);
 
     while (index <= nbGame){
         gameMap = InitGameMap();
@@ -45,8 +51,7 @@ void TrainAI(const unsigned nbGame /*= 1000000*/){
                 if(HasSomeoneWon(gameMap)){
                     TurnHistoryDataIntoTrainingData(AIToTrain, true);
                     TurnHistoryDataIntoTrainingData(controlledAI, false);
-                    turnOrder[0] = "controlledAI";
-                    turnOrder[1] = "AIToTrain";
+                    generateRandomTurnOrder(turnOrder);
                     turnIndex = 0;
                     break;
                 }
@@ -67,8 +72,7 @@ void TrainAI(const unsigned nbGame /*= 1000000*/){
                 if(HasSomeoneWon(gameMap)){
                     TurnHistoryDataIntoTrainingData(AIToTrain, false);
                     TurnHistoryDataIntoTrainingData(controlledAI, true);
-                    turnOrder[0] = "AIToTrain";
-                    turnOrder[1] = "controlledAI";
+                    generateRandomTurnOrder(turnOrder);
                     turnIndex = 0;
                     break;
                 }
@@ -120,3 +124,5 @@ void PlayAgainstAI(){
         }
     }
 }
+
+
